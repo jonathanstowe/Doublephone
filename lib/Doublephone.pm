@@ -60,7 +60,7 @@ afterwards.
 
 use NativeCall;
 
-class Doublephone {
+module Doublephone {
     constant LIB = %?RESOURCES<libraries/double_metaphone>.Str;
 
     sub DoubleMetaphone(Str $str, CArray[Str] $out is rw) is native(LIB) { * }
