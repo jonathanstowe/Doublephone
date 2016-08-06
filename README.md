@@ -32,6 +32,12 @@ typed names.
 This is basically a Perl 6 binding to the original C implementation I extracted from the Perl 5
 [Text::DoubleMetaphone](https://metacpan.org/release/Text-DoubleMetaphone).  
 
+The algorithm itself isn't designed for unicode strings and making something that is is
+probably best left to another module using a different technique.
+
+Though this is described as a "phonetic" encoding it is only approximately so, rather it is
+optimised for comparison and not as a guide to how something might be pronounced.
+
 ## Installation
 
 If you have a working installation of Rakudo Perl 6 with one of ```panda``` or ```zef``` installed
@@ -60,7 +66,8 @@ a fairly long heritage, so is less likely to be buggy than the way in
 which I am using it.  Please feel free to report any bugs/send patches
 or just make suggestions to https://github.com/jonathanstowe/Doublephone/issues
 
-I would like more tests for the correct output if anyone finds a good
+
+I would also like more tests for the correct output if anyone finds a good
 data source for these.
 
 # Licence and Copyright
