@@ -1,6 +1,6 @@
 {
   "name": "Doublephone",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "auth": "github:jonathanstowe",
   "api": "1.0",
   "description": "Implementation of the Double Metaphone phonetic encoding algorithm",
