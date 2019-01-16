@@ -8,7 +8,7 @@ use Doublephone;
 
 my @lines;
 
-for $*PROGRAM.parent.child("words.txt").lines -> $line {
+for $*PROGRAM.parent.add("data/words.txt").lines -> $line {
     @lines.push: $line.split: /\,/;
 }
 
