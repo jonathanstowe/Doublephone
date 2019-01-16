@@ -66,7 +66,7 @@ data source for these.
 
 This is free software, please see the [LICENCE](LICENCE) file in the distribution.
 
-© Jonathan Stowe, 2016, 2017
+© Jonathan Stowe, 2016, 2017, 2019
 
 The C portions from Text::DoubleMetaphone have the following copyright text:
 
