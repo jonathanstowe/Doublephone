@@ -1,4 +1,4 @@
-use v6.c;
+use v6;
 
 =begin pod
 
@@ -20,8 +20,7 @@ say double-metaphone("SMIHT"); # (SMT XMT)
 
 =head1 DESCRIPTION
 
-This implements the L<Double
-Metaphone|https://en.wikipedia.org/wiki/Metaphone#Double_Metaphone>
+This implements the L<Double Metaphone|https://en.wikipedia.org/wiki/Metaphone#Double_Metaphone>
 algorithm which can be used to match similar sounding words.  It is an
 improved version of Metaphone (which in turn follows on from soundex,)
 and was first described by Lawrence Philips in the June 2000 issue of
