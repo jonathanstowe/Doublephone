@@ -10,21 +10,21 @@
 * * If META_USE_PERL_MALLOC is defined we use Perl's memory routines.
 * */
 #ifdef META_USE_PERL_MALLOC
- 
+
 #include "EXTERN.h"
 #include "perl.h"
 #define META_MALLOC(v,n,t) New(1,v,n,t)
 #define META_REALLOC(v,n,t) Renew(v,n,t)
 #define META_FREE(x) Safefree((x))
- 
+
 #else
- 
+
 #define META_MALLOC(v,n,t) \
           (v = (t*)malloc(((n)*sizeof(t))))
 #define META_REALLOC(v,n,t) \
 	                  (v = (t*)realloc((v),((n)*sizeof(t))))
 #define META_FREE(x) free((x))
-	 
+
 #endif /* META_USE_PERL_MALLOC */
 
 
@@ -38,14 +38,14 @@ NewMetaString(char *init_str)
     assert( s != NULL );
 
     if (init_str == NULL)
-	init_str = empty_string;
+		init_str = empty_string;
     s->length  = strlen(init_str);
     /* preallocate a bit more for potential growth */
     s->bufsize = s->length + 7;
 
     META_MALLOC(s->str, s->bufsize, char);
     assert( s->str != NULL );
-    
+
     strncpy(s->str, init_str, s->length + 1);
     s->free_string_on_destroy = 1;
 
@@ -96,7 +96,7 @@ IsVowel(metastring * s, int pos)
 	return 0;
 
     c = *(s->str + pos);
-    if ((c == 'A') || (c == 'E') || (c == 'I') || (c =='O') || 
+    if ((c == 'A') || (c == 'E') || (c == 'I') || (c =='O') ||
         (c =='U')  || (c == 'Y'))
 	return 1;
 
@@ -147,7 +147,7 @@ SetAt(metastring * s, int pos, char c)
 }
 
 
-/* 
+/*
    Caveats: the START value is 0 based
 */
 int
@@ -208,8 +208,8 @@ DoubleMetaphone(char *str, char **codes)
 
     current = 0;
     /* we need the real length and last prior to padding */
-    length  = strlen(str); 
-    last    = length - 1; 
+    length  = strlen(str);
+    last    = length - 1;
     original = NewMetaString(str);
     /* Pad original so we can index beyond end */
     MetaphAdd(original, "     ");
@@ -234,7 +234,7 @@ DoubleMetaphone(char *str, char **codes)
       }
 
     /* main loop */
-    while ((primary->length < 4) || (secondary->length < 4))  
+    while ((primary->length < 4) || (secondary->length < 4))
       {
 	  if (current >= length)
 	      break;
@@ -343,7 +343,7 @@ DoubleMetaphone(char *str, char **codes)
 				      "ARCHIT", "ORCHID", "")
 			  || StringAt(original, (current + 2), 1, "T", "S",
 				      "")
-			  || ((StringAt(original, (current - 1), 1, "A", "O", "U", "E", "") 
+			  || ((StringAt(original, (current - 1), 1, "A", "O", "U", "E", "")
                           || (current == 0))
 			   /* e.g., 'wachtler', 'wechsler', but not 'tichner' */
 			  && StringAt(original, (current + 2), 1, "L", "R",
@@ -397,38 +397,29 @@ DoubleMetaphone(char *str, char **codes)
 		  }
 
 		/* double 'C', but not if e.g. 'McClellan' */
-		if (StringAt(original, current, 2, "CC", "")
-		    && !((current == 1) && (GetAt(original, 0) == 'M')))
+		if (StringAt(original, current, 2, "CC", "") && !((current == 1) && (GetAt(original, 0) == 'M'))) {
 		    /* 'bellocchio' but not 'bacchus' */
-		    if (StringAt(original, (current + 2), 1, "I", "E", "H", "")
-			&& !StringAt(original, (current + 2), 2, "HU", ""))
-		      {
+		    if (StringAt(original, (current + 2), 1, "I", "E", "H", "") && !StringAt(original, (current + 2), 2, "HU", "")) {
 			  /* 'accident', 'accede' 'succeed' */
-			  if (
-			      ((current == 1)
-			       && (GetAt(original, current - 1) == 'A'))
-			      || StringAt(original, (current - 1), 5, "UCCEE",
-					  "UCCES", ""))
-			    {
+			  if ( ((current == 1) && (GetAt(original, current - 1) == 'A')) || StringAt(original, (current - 1), 5, "UCCEE", "UCCES", "")) {
 				MetaphAdd(primary, "KS");
 				MetaphAdd(secondary, "KS");
 				/* 'bacci', 'bertucci', other italian */
-			    }
-			  else
-			    {
+			  }
+			  else {
 				MetaphAdd(primary, "X");
 				MetaphAdd(secondary, "X");
-			    }
+			  }
 			  current += 3;
 			  break;
-		      }
-		    else
-		      {	  /* Pierce's rule */
+		    }
+		    else {	  /* Pierce's rule */
 			  MetaphAdd(primary, "K");
 			  MetaphAdd(secondary, "K");
 			  current += 2;
 			  break;
-		      }
+		    }
+		}
 
 		if (StringAt(original, current, 2, "CK", "CG", "CQ", ""))
 		  {
@@ -751,7 +742,7 @@ DoubleMetaphone(char *str, char **codes)
 				  if (!StringAt(original, (current + 1), 1, "L", "T",
 				                "K", "S", "N", "M", "B", "Z", "")
 				      && !StringAt(original, (current - 1), 1,
-						   "S", "K", "L", "")) 
+						   "S", "K", "L", ""))
                                     {
 				      MetaphAdd(primary, "J");
 				      MetaphAdd(secondary, "J");
@@ -931,7 +922,7 @@ DoubleMetaphone(char *str, char **codes)
 		      break;
 		  }
 
-		/* german & anglicisations, e.g. 'smith' match 'schmidt', 'snider' match 'schneider' 
+		/* german & anglicisations, e.g. 'smith' match 'schmidt', 'snider' match 'schneider'
 		   also, -sz- in slavic language altho in hungarian it is pronounced 's' */
 		if (((current == 0)
 		     && StringAt(original, (current + 1), 1, "M", "N", "L", "W", ""))
@@ -946,44 +937,36 @@ DoubleMetaphone(char *str, char **codes)
 		      break;
 		  }
 
-		if (StringAt(original, current, 2, "SC", ""))
-		  {
+		if (StringAt(original, current, 2, "SC", "")) {
 		      /* Schlesinger's rule */
-		      if (GetAt(original, current + 2) == 'H')
-			  /* dutch origin, e.g. 'school', 'schooner' */
-			  if (StringAt(original, (current + 3), 2, "OO", "ER", "EN",
-			               "UY", "ED", "EM", ""))
-			    {
-				/* 'schermerhorn', 'schenker' */
-				if (StringAt(original, (current + 3), 2, "ER", "EN", ""))
-				  {
-				      MetaphAdd(primary, "X");
-				      MetaphAdd(secondary, "SK");
-				  }
-				else
-                                  {
-				      MetaphAdd(primary, "SK");
-				      MetaphAdd(secondary, "SK");
-                                  }
-				current += 3;
-				break;
-			    }
-			  else
-			    {
-				if ((current == 0) && !IsVowel(original, 3)
-				    && (GetAt(original, 3) != 'W'))
-				  {
-				      MetaphAdd(primary, "X");
-				      MetaphAdd(secondary, "S");
-				  }
-				else
-				  {
-				      MetaphAdd(primary, "X");
-				      MetaphAdd(secondary, "X");
-				  }
-				current += 3;
-				break;
-			    }
+		      if (GetAt(original, current + 2) == 'H') {
+					  /* dutch origin, e.g. 'school', 'schooner' */
+					  if (StringAt(original, (current + 3), 2, "OO", "ER", "EN", "UY", "ED", "EM", "")) {
+						/* 'schermerhorn', 'schenker' */
+						if (StringAt(original, (current + 3), 2, "ER", "EN", "")) {
+							  MetaphAdd(primary, "X");
+							  MetaphAdd(secondary, "SK");
+						}
+						else {
+							  MetaphAdd(primary, "SK");
+							  MetaphAdd(secondary, "SK");
+						}
+						current += 3;
+						break;
+					  }
+					  else {
+						if ((current == 0) && !IsVowel(original, 3) && (GetAt(original, 3) != 'W')) {
+							  MetaphAdd(primary, "X");
+							  MetaphAdd(secondary, "S");
+						}
+						else {
+							  MetaphAdd(primary, "X");
+							  MetaphAdd(secondary, "X");
+						}
+						current += 3;
+						break;
+					  }
+			  }
 
 		      if (StringAt(original, (current + 2), 1, "I", "E", "Y", ""))
 			{
@@ -1134,7 +1117,7 @@ DoubleMetaphone(char *str, char **codes)
 		      MetaphAdd(primary, "KS");
 		      MetaphAdd(secondary, "KS");
                   }
-                  
+
 
 		if (StringAt(original, (current + 1), 1, "C", "X", ""))
 		    current += 2;

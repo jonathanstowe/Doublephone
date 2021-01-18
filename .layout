@@ -44,10 +44,6 @@
       "name": "README.md"
     },
     {
-      "type": "file",
-      "name": "Build.pm"
-    },
-    {
       "children": [
         {
           "name": "Doublephone.pm",

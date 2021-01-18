@@ -1,6 +1,6 @@
 {
   "name": "Doublephone",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "auth": "github:jonathanstowe",
   "api": "1.0",
   "description": "Implementation of the Double Metaphone phonetic encoding algorithm",
@@ -11,16 +11,28 @@
     "bugtracker": "https://github.com/jonathanstowe/Doublephone/issues"
   },
   "perl": "6.*",
+  "raku": "6.*",
   "resources": [
     "libraries/double_metaphone"
   ],
-  "build-depends": [
-    "Shell::Command",
-    "LibraryMake"
-  ],
-  "depends": [
-    "LibraryMake"
-  ],
+  "depends": {
+     "build" : {
+        "requires" : [
+           "Distribution::Builder::MakeFromJSON:ver<0.6+>"
+        ]
+     },
+     "runtime": {
+        "requires": [
+        ]
+     }
+  },
+  "builder": "Distribution::Builder::MakeFromJSON",
+  "build" : {
+     "src-dir" : "src",
+     "makefile-variables" : {
+        "libdouble_metaphone": {"resource": "libraries/double_metaphone"}
+     }
+  },
   "tags": [
     "search",
     "phonetic",
@@ -37,5 +49,5 @@
   "authors": [
     "Jonathan Stowe <jns+gh@gellyfish.co.uk>"
   ],
-  "meta-version": "0"
+  "meta-version": "1"
 }

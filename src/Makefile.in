@@ -4,4 +4,4 @@ all: %DESTDIR%/%libdouble_metaphone%
 	%LD% %LDSHARED% %LDFLAGS% %LIBS% %LDOUT%%DESTDIR%/%libdouble_metaphone% libdouble_metaphone%O%
 
 libdouble_metaphone%O%: double_metaphone.c
-	%CC% -c %CCSHARED% %CCFLAGS% -DVERSION='"0.4.1"' %CCOUT% libdouble_metaphone%O% double_metaphone.c
+	%CC% -c %CCSHARED% %CCFLAGS% -Wno-stringop-overflow -DVERSION='"0.4.1"' %CCOUT% libdouble_metaphone%O% double_metaphone.c
