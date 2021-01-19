@@ -36,7 +36,7 @@ comparison is required then either of the primary or secondary codes can
 be matched to the target primary or secondary code - this will also deal
 with, for example, transpositions in typed names.
 
-This is basically a Perl 6 binding to the original
+This is basically a Raku binding to the original
 C implementation I extracted from the Perl 5
 L<Text::DoubleMetaphone|https://metacpan.org/release/Text-DoubleMetaphone>.
 

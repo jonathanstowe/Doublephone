@@ -5,3 +5,6 @@ all: %DESTDIR%/%libdouble_metaphone%
 
 libdouble_metaphone%O%: double_metaphone.c
 	%CC% -c %CCSHARED% %CCFLAGS% -Wno-stringop-overflow -DVERSION='"0.4.1"' %CCOUT% libdouble_metaphone%O% double_metaphone.c
+
+distclean: %DESTDIR%/%libdouble_metaphone%
+	rm %DESTDIR%/%libdouble_metaphone% libdouble_metaphone%O% Makefile

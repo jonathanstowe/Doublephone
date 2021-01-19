@@ -29,7 +29,7 @@ as well as dealing with ambiguities.  So for instance "SMITH", "SMYTH" and "SMYT
 to the target primary or secondary code - this will also deal with, for example, transpositions in
 typed names.
 
-This is basically a Perl 6 binding to the original C implementation I extracted from the Perl 5
+This is basically a Raku binding to the original C implementation I extracted from the Perl 5
 [Text::DoubleMetaphone](https://metacpan.org/release/Text-DoubleMetaphone).  
 
 The algorithm itself isn't designed for unicode strings and making something that is is
@@ -40,8 +40,7 @@ optimised for comparison and not as a guide to how something might be pronounced
 
 ## Installation
 
-If you have a working installation of Rakudo Perl 6 with ```zef``` installed
-then you should be able to install this with either:
+If you have a working installation of Rakudo with ```zef``` installed then you should be able to install this with either:
 
 	zef install Doublephone
 
@@ -66,7 +65,7 @@ data source for these.
 
 This is free software, please see the [LICENCE](LICENCE) file in the distribution.
 
-© Jonathan Stowe, 2016, 2017, 2019
+© Jonathan Stowe, 2016 - 2021
 
 The C portions from Text::DoubleMetaphone have the following copyright text:
 
