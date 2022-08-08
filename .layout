@@ -46,7 +46,7 @@
     {
       "children": [
         {
-          "name": "Doublephone.pm",
+          "name": "Doublephone.rakumod",
           "type": "file"
         }
       ],
